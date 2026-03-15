@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Nav App - Authorization</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; max-width: 720px; margin: 80px auto; padding: 0 20px; color: #333; text-align: center; }
+        h2 { color: #1a1a1a; }
+        .code-box { background: #f5f5f5; border: 2px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: monospace; font-size: 14px; word-break: break-all; user-select: all; }
+        .info { color: #666; font-size: 14px; }
+        #error { color: #c00; display: none; }
+    </style>
+</head>
+<body>
+    <h2>Authorization Successful!</h2>
+    <p>Copy the values below and paste them back into your terminal.</p>
+
+    <div id="success">
+        <p><strong>Authorization Code:</strong></p>
+        <div class="code-box" id="auth-code"></div>
+
+        <p><strong>Realm ID (Company ID):</strong></p>
+        <div class="code-box" id="realm-id"></div>
+
+        <p class="info">You can close this tab after copying the values.</p>
+    </div>
+
+    <div id="error">
+        <p>Authorization failed. Please try again.</p>
+        <p id="error-details"></p>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const realmId = params.get('realmId');
+        const error = params.get('error');
+
+        if (code) {
+            document.getElementById('auth-code').textContent = code;
+            document.getElementById('realm-id').textContent = realmId || 'N/A';
+        } else {
+            document.getElementById('success').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error-details').textContent = error || 'No authorization code received.';
+        }
+    </script>
+</body>
+</html>
