@@ -1,0 +1,14 @@
+[project]
+name = "quickbooks-mcp"
+version = "0.1.0"
+description = "Local MCP server for QuickBooks Online bookkeeping"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]",
+    "python-quickbooks",
+    "intuitlib",
+    "python-dotenv",
+]
+
+[project.scripts]
+qb-mcp = "server:main"
